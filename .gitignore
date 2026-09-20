@@ -1,0 +1,31 @@
+# OS files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Large non-web media / Working source files
+*.psd
+*.ai
+*.mp4
+*.mov
+*.zip
+*.rar
+*.7z
+
+# Python / Environment
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+
+# IDE / Editor
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Antigravity / AI assistant metadata
+.gemini/
+scratch/

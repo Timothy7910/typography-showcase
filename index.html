@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>字体档案库 · Typography Specimen Showcase</title>
+  <meta name="description" content="1000+ 优秀中西文字体设计、标准字、笔画构架与视觉标本展馆" />
+
+  <!-- Typography Webfonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/modal.css" />
+</head>
+<body>
+
+  <!-- Top Exhibition Header -->
+  <header class="site-header">
+    <div class="header-container">
+      <div class="brand-section">
+        <h1 class="brand-title">
+          <span class="brand-glyph">墨</span>
+          <span>字体档案库</span>
+        </h1>
+        <div class="brand-meta">
+          <span>SPECIMEN ARCHIVE</span> · 
+          <span>全馆共 <strong id="totalCountLabel">1465</strong> 件藏品</span>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <!-- Inspiration Dice Roll -->
+        <button id="btnRandomDice" class="tool-btn" title="灵感掷骰：随机漫游一件字型">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="3" ry="3"></rect>
+            <circle cx="8.5" cy="8.5" r="1.2" fill="currentColor"></circle>
+            <circle cx="15.5" cy="8.5" r="1.2" fill="currentColor"></circle>
+            <circle cx="12" cy="12" r="1.2" fill="currentColor"></circle>
+            <circle cx="8.5" cy="15.5" r="1.2" fill="currentColor"></circle>
+            <circle cx="15.5" cy="15.5" r="1.2" fill="currentColor"></circle>
+          </svg>
+          <span>灵感掷骰</span>
+        </button>
+
+        <!-- Favorites Filter -->
+        <button id="btnFavoritesToggle" class="tool-btn" title="查看我收藏的字型灵感">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+          </svg>
+          <span>收藏夹</span>
+          <span id="favCountBadge" class="category-count" style="display:none;background:var(--accent);color:var(--accent-contrast);padding:0 5px;border-radius:10px;font-weight:bold;">0</span>
+        </button>
+
+        <!-- Lighting Atmosphere Switcher -->
+        <button id="btnThemeToggle" class="tool-btn" title="切换展厅氛围光 (暗房曜石 / 纸本象牙)">
+          <!-- Dynamic Sun/Moon SVG injected via js -->
+          <span>纸本象牙</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Sticky Controls Deck: Search, Layout & Style Filters -->
+  <section class="controls-deck">
+    <div class="controls-container">
+      <div class="controls-row-top">
+        <!-- Live Instant Search -->
+        <div class="search-wrapper">
+          <span class="search-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </span>
+          <input 
+            type="text" 
+            id="searchInput" 
+            class="search-input" 
+            placeholder="搜寻字形名称、标签、或按 '/' 快捷聚焦..." 
+            autocomplete="off" 
+            spellcheck="false" 
+          />
+          <button id="searchClear" class="search-clear" title="清空检索内容">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Layout Mode Selectors -->
+        <div class="view-switchers">
+          <span style="font-family:var(--font-mono);font-size:0.8rem;color:var(--text-tertiary);margin-right:0.5rem;">
+            当前呈现: <strong id="currentCountLabel" style="color:var(--text-primary)">1465</strong> 件
+          </span>
+          <div class="segmented-group">
+            <button id="btnLayoutMasonry" class="seg-btn active" title="瀑布流自适应布局">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="7" height="11" rx="1"></rect>
+                <rect x="14" y="3" width="7" height="6" rx="1"></rect>
+                <rect x="14" y="13" width="7" height="8" rx="1"></rect>
+                <rect x="3" y="18" width="7" height="3" rx="1"></rect>
+              </svg>
+              <span>瀑布流</span>
+            </button>
+            <button id="btnLayoutGrid" class="seg-btn" title="标本网格矩阵">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="7" height="7" rx="1"></rect>
+                <rect x="14" y="3" width="7" height="7" rx="1"></rect>
+                <rect x="14" y="14" width="7" height="7" rx="1"></rect>
+                <rect x="3" y="14" width="7" height="7" rx="1"></rect>
+              </svg>
+              <span>矩阵</span>
+            </button>
+            <button id="btnLayoutFocus" class="seg-btn" title="单件沉浸视界">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
+              </svg>
+              <span>巨幕</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Category Filter Chips -->
+      <nav id="categoryFilters" class="filter-categories" aria-label="分类筛选"></nav>
+    </div>
+  </section>
+
+  <!-- Main Specimen Gallery -->
+  <main id="galleryStage" class="main-stage gallery-masonry"></main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div>
+        <span>字型标本档案 · 典藏 1,465+ 字体艺术作品</span>
+      </div>
+      <div>
+        <span>遵循 Impeccable 工艺底线设计 · 纯原生零依赖构建</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Specimen Inspector Modal (标本镜鉴) -->
+  <div id="modalBackdrop" class="modal-backdrop">
+    <div class="modal-shell">
+      <!-- Modal Header -->
+      <header class="modal-header">
+        <div class="modal-title-group">
+          <h2 id="modalItemTitle" class="modal-item-title">字型标本</h2>
+          <span id="modalItemIndex" class="modal-item-index">#0001</span>
+        </div>
+        <div class="modal-header-actions">
+          <button id="modalBtnFavorite" class="action-icon-btn" title="收藏/取消收藏 (快捷键: F)">
+            <!-- Heart icon injected via js -->
+          </button>
+          <button id="modalBtnDownload" class="action-icon-btn" title="下载原图">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+          </button>
+          <button id="modalBtnClose" class="action-icon-btn" title="关闭检视 (快捷键: Esc)">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+      </header>
+
+      <!-- Modal Body (Stage + Inspector Sidebar) -->
+      <div class="modal-body">
+        <!-- Interactive Stage (Zoom & Pan) -->
+        <div id="modalStage" class="modal-stage">
+          <div id="stageCanvasWrapper" class="stage-canvas-wrapper">
+            <img id="modalFullImg" class="modal-full-img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="标本全图" />
+          </div>
+
+          <!-- Floating Zoom Controls -->
+          <div class="stage-floating-toolbar">
+            <button id="btnZoomOut" class="action-icon-btn" style="width:1.85rem;height:1.85rem;" title="缩小 (-)">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                <line x1="8" y1="11" x2="14" y2="11"></line>
+              </svg>
+            </button>
+            <span id="zoomLevelLabel" class="zoom-level-label">100%</span>
+            <button id="btnZoomIn" class="action-icon-btn" style="width:1.85rem;height:1.85rem;" title="放大 (+)">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                <line x1="11" y1="8" x2="11" y2="14"></line>
+                <line x1="8" y1="11" x2="14" y2="11"></line>
+              </svg>
+            </button>
+            <button id="btnZoomReset" class="action-icon-btn" style="width:1.85rem;height:1.85rem;" title="复位 (0 / R)">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="23 4 23 10 17 10"></polyline>
+                <polyline points="1 20 1 14 7 14"></polyline>
+                <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Prev / Next Navigation Arrows -->
+          <button id="modalBtnPrev" class="modal-nav-btn nav-prev" title="上一件标本 (←)">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </button>
+          <button id="modalBtnNext" class="modal-nav-btn nav-next" title="下一件标本 (→)">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Side Inspector Drawer -->
+        <aside class="modal-inspector-panel">
+          <!-- Dynamic Color Spectrum Extraction -->
+          <div>
+            <div class="panel-section-title">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="13.5" cy="6.5" r=".5" fill="currentColor"></circle>
+                <circle cx="17.5" cy="10.5" r=".5" fill="currentColor"></circle>
+                <circle cx="8.5" cy="7.5" r=".5" fill="currentColor"></circle>
+                <circle cx="6.5" cy="12.5" r=".5" fill="currentColor"></circle>
+                <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"></path>
+              </svg>
+              <span>提取画作主色谱 (点击复制)</span>
+            </div>
+            <div id="extractedPalette"></div>
+          </div>
+
+          <!-- Extracted Text (OCR) -->
+          <div id="ocrSection" style="display:none;">
+            <div class="panel-section-title">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="4 7 4 4 20 4 20 7"></polyline>
+                <line x1="9" y1="20" x2="15" y2="20"></line>
+                <line x1="12" y1="4" x2="12" y2="20"></line>
+              </svg>
+              <span>画面识别字句 (OCR)</span>
+            </div>
+            <div id="modalOcrText" class="ocr-text-box"></div>
+          </div>
+
+          <!-- Technical Metadata -->
+          <div>
+            <div class="panel-section-title">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="16" x2="12" y2="12"></line>
+                <line x1="12" y1="8" x2="12.01" y2="8"></line>
+              </svg>
+              <span>作品规格属性</span>
+            </div>
+            <div class="meta-field-list">
+              <div class="meta-row">
+                <span class="meta-key">分类领域</span>
+                <span id="metaCategory" class="meta-val">-</span>
+              </div>
+              <div class="meta-row">
+                <span class="meta-key">原生像素</span>
+                <span id="metaResolution" class="meta-val">-</span>
+              </div>
+              <div class="meta-row">
+                <span class="meta-key">画幅长宽比</span>
+                <span id="metaAspect" class="meta-val">-</span>
+              </div>
+              <div class="meta-row">
+                <span class="meta-key">格式编码</span>
+                <span id="metaFormat" class="meta-val">-</span>
+              </div>
+              <div class="meta-row">
+                <span class="meta-key">文件量级</span>
+                <span id="metaSize" class="meta-val">-</span>
+              </div>
+              <div class="meta-row">
+                <span class="meta-key">文件原名</span>
+                <span id="metaFilename" class="meta-val" title="">-</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Studio Keyboard Shortcuts -->
+          <div>
+            <div class="panel-section-title">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="4" width="20" height="16" rx="2" ry="2"></rect>
+                <line x1="6" y1="8" x2="6.01" y2="8"></line>
+                <line x1="10" y1="8" x2="10.01" y2="8"></line>
+                <line x1="14" y1="8" x2="14.01" y2="8"></line>
+                <line x1="18" y1="8" x2="18.01" y2="8"></line>
+                <line x1="6" y1="12" x2="6.01" y2="12"></line>
+                <line x1="18" y1="12" x2="18.01" y2="12"></line>
+                <line x1="8" y1="16" x2="16" y2="16"></line>
+              </svg>
+              <span>工作台快捷操作</span>
+            </div>
+            <div class="kbd-shortcuts-list">
+              <div class="kbd-row"><span>切换上/下一件</span> <span><kbd>←</kbd> <kbd>→</kbd></span></div>
+              <div class="kbd-row"><span>无级缩放</span> <span><kbd>滚轮</kbd> / <kbd>+</kbd> <kbd>-</kbd></span></div>
+              <div class="kbd-row"><span>细节拖拽平移</span> <span><kbd>按住鼠标拖拽</kbd></span></div>
+              <div class="kbd-row"><span>复位缩放</span> <span><kbd>R</kbd> / <kbd>0</kbd></span></div>
+              <div class="kbd-row"><span>标本收藏切换</span> <span><kbd>F</kbd></span></div>
+              <div class="kbd-row"><span>关闭镜鉴</span> <span><kbd>Esc</kbd></span></div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dynamic Toast Container -->
+  <div id="toastContainer" class="toast-container" aria-live="polite"></div>
+
+  <!-- Scripts -->
+  <script src="js/catalog-data.js"></script>
+  <script src="js/icons.js"></script>
+  <script src="js/favorites.js"></script>
+  <script src="js/inspector.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
