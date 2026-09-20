@@ -1,5 +1,5 @@
 /**
- * Specimen Inspector (标本镜鉴)
+ * Specimen Inspector (標本鏡鑑)
  * Features: Deep zoom & drag-pan, Canvas dynamic color palette sampling,
  * metadata extraction, keyboard navigation & clipboard actions.
  */
@@ -114,7 +114,7 @@ class SpecimenInspector {
       if (!this.currentItem) return;
       const isFav = window.favoritesManager.toggle(this.currentItem.id);
       this.updateFavoriteUI(isFav);
-      window.showToast?.(isFav ? '已添加至灵感收藏' : '已从收藏中移除');
+      window.showToast?.(isFav ? '已加入靈感收藏' : '已從收藏中移除');
     });
 
     // Download action
@@ -215,7 +215,7 @@ class SpecimenInspector {
 
     // Reset image & palette
     this.fullImg.src = item.src;
-    this.metaResolution.textContent = '载入中...';
+    this.metaResolution.textContent = '載入中...';
     this.metaAspect.textContent = '-';
     this.paletteContainer.innerHTML = '<span style="font-size:0.75rem;color:var(--text-tertiary)">色彩提取中...</span>';
 
@@ -318,13 +318,13 @@ class SpecimenInspector {
       this.renderPalette(palette);
     } catch (err) {
       console.warn('Canvas palette extraction error (CORS or image access)', err);
-      this.paletteContainer.innerHTML = '<span style="font-size:0.75rem;color:var(--text-tertiary)">色谱不可取</span>';
+      this.paletteContainer.innerHTML = '<span style="font-size:0.75rem;color:var(--text-tertiary)">色譜不可取</span>';
     }
   }
 
   renderPalette(palette) {
     if (palette.length === 0) {
-      this.paletteContainer.innerHTML = '<span style="font-size:0.75rem;color:var(--text-tertiary)">未提取到显性色</span>';
+      this.paletteContainer.innerHTML = '<span style="font-size:0.75rem;color:var(--text-tertiary)">未提取到顯性色</span>';
       return;
     }
 
@@ -335,7 +335,7 @@ class SpecimenInspector {
     palette.forEach(color => {
       const item = document.createElement('div');
       item.className = 'color-swatch-item';
-      item.title = `点击复制 ${color.hex.toUpperCase()}`;
+      item.title = `點擊複製 ${color.hex.toUpperCase()}`;
 
       item.innerHTML = `
         <div class="color-chip" style="background-color: ${color.hex}"></div>
@@ -344,7 +344,7 @@ class SpecimenInspector {
 
       item.addEventListener('click', () => {
         navigator.clipboard.writeText(color.hex.toUpperCase()).then(() => {
-          window.showToast?.(`已复制色值: ${color.hex.toUpperCase()}`);
+          window.showToast?.(`已複製色值: ${color.hex.toUpperCase()}`);
         });
       });
 

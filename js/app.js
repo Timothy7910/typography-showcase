@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.documentElement.setAttribute('data-theme', t);
     localStorage.setItem('typography_theme', t);
     themeToggle.innerHTML = window.Icons.get(t === 'dark' ? 'sun' : 'moon', 16) + 
-      ` <span>${t === 'dark' ? '纸本象牙' : '暗房曜石'}</span>`;
+      ` <span>${t === 'dark' ? '紙本象牙' : '暗房曜石'}</span>`;
   }
 
   themeToggle.addEventListener('click', () => {
@@ -147,10 +147,10 @@ document.addEventListener('DOMContentLoaded', () => {
           <div style="color:var(--text-tertiary);margin-bottom:1rem;">
             ${window.Icons.get('search', 42)}
           </div>
-          <h2 class="empty-title">未搜寻到匹配字型标本</h2>
-          <p class="empty-desc">尝试调整筛选分类、关键词，或清除搜索框内容以浏览全部 1,465 件藏品。</p>
+          <h2 class="empty-title">未搜尋到匹配字型標本</h2>
+          <p class="empty-desc">嘗試調整篩選分類、關鍵字，或清除搜尋框內容以瀏覽全部 1,465 件藏品。</p>
           <button class="tool-btn" id="emptyResetBtn">
-            ${window.Icons.get('refresh', 16)} 重置检索条件
+            ${window.Icons.get('refresh', 16)} 重設檢索條件
           </button>
         </div>
       `;
@@ -198,7 +198,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const sentinel = document.createElement('div');
       sentinel.id = 'loadSentinel';
       sentinel.className = 'loading-indicator';
-      sentinel.innerHTML = `<div class="spinner"></div> <span>标本加载中 (${state.renderedCount} / ${state.filtered.length})...</span>`;
+      sentinel.innerHTML = `<div class="spinner"></div> <span>標本載入中 (${state.renderedCount} / ${state.filtered.length})...</span>`;
       stage.appendChild(sentinel);
 
       sentinelObserver.observe(sentinel);
@@ -219,12 +219,12 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="card-actions-overlay">
           <div class="overlay-top">
             <span class="tag-badge" style="background:rgba(0,0,0,0.6);color:#fff">${item.category}</span>
-            <button class="action-icon-btn card-fav-btn ${isFav ? 'active' : ''}" title="收藏此标本">
+            <button class="action-icon-btn card-fav-btn ${isFav ? 'active' : ''}" title="收藏此標本">
               ${isFav ? window.Icons.get('heart-filled', 15) : window.Icons.get('heart', 15)}
             </button>
           </div>
           <div class="overlay-bottom">
-            <button class="action-icon-btn card-inspect-btn" title="标本镜鉴 (快捷检视)">
+            <button class="action-icon-btn card-inspect-btn" title="標本鏡鑑 (快捷檢視)">
               ${window.Icons.get('focus', 15)}
             </button>
           </div>
@@ -378,7 +378,7 @@ document.addEventListener('DOMContentLoaded', () => {
       diceTrigger.style.transition = '';
     }, 500);
 
-    window.showToast(`灵感掷骰：已选中 #${String(chosen.id).padStart(4, '0')} ${chosen.title}`);
+    window.showToast(`靈感擲骰：已選中 #${String(chosen.id).padStart(4, '0')} ${chosen.title}`);
     inspector.open(chosen, pool);
   });
 

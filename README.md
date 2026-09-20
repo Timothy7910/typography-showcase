@@ -32,7 +32,9 @@
 ├── js/
 │   ├── catalog-data.js       # 智慧識別後的 1,465 幅作品元數據
 │   ├── app.js                # 藝廊渲染、篩選、搜尋與互動邏輯
-│   └── modal.js              # 詳情彈窗與鍵盤導覽
+│   ├── inspector.js          # 標本鏡鑑檢視器、色譜提取與鍵盤導覽
+│   ├── favorites.js          # 本地收藏夾狀態管理
+│   └── icons.js              # 幾何向量圖標庫
 ├── scripts/
 │   ├── smart_font_analyzer.py # RapidOCR 字體分析與語意提取腳本
 │   └── generate_catalog.py   # 目錄自動建構腳本

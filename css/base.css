@@ -31,8 +31,8 @@
   --shadow-lg: 0 6px 12px -1px rgba(0, 0, 0, 0.5);
   --shadow-focus: 0 0 0 2px var(--bg-canvas), 0 0 0 4px var(--border-focus);
 
-  --font-serif: "Noto Serif SC", "Songti SC", "Source Han Serif SC", "Source Han Serif CN", Georgia, "Times New Roman", serif;
-  --font-sans: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", system-ui, sans-serif;
+  --font-serif: "Noto Serif TC", "Songti TC", "Source Han Serif TC", "Source Han Serif TW", "LiSong Pro", Georgia, "Times New Roman", serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, "PingFang TC", "Hiragino Sans TC", "Microsoft JhengHei", "Noto Sans TC", system-ui, sans-serif;
   --font-mono: "SF Mono", "JetBrains Mono", "Roboto Mono", Menlo, Consolas, monospace;
 
   --radius-xs: 3px;
@@ -45,7 +45,7 @@
 }
 
 [data-theme="light"] {
-  /* Warm Editorial Specimen Paper (纸本象牙白) */
+  /* Warm Editorial Specimen Paper (紙本象牙白) */
   --bg-canvas: #f6f5f1;
   --bg-surface: #ffffff;
   --bg-surface-elevated: #f0eee8;

@@ -282,7 +282,7 @@
   }
 }
 
-/* Layout Mode: Grid (标本网格) */
+/* Layout Mode: Grid (標本網格) */
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
